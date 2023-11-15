@@ -1,16 +1,16 @@
 import csv
 import os
 
-# Read the CSV file
+# Pull data from the CSV file
 def read_csv(file_path):
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         data = [row for row in reader]
     return data
 
-# Analyze the votes
+# Analyze all the votes collected
 def analyze_votes(data):
-    # Initialize variables
+    # declare variables we are using
     total_votes = 0
     candidates = {}
     
@@ -23,10 +23,10 @@ def analyze_votes(data):
         else:
             candidates[candidate] = 1
 
-    # Calculate percentages
+    # Calculate percentages of votes 
     percentages = {candidate: (votes / total_votes) * 100 for candidate, votes in candidates.items()}
 
-    # Find the winner
+    # Calculate who is the winner
     winner = max(percentages, key=percentages.get)
 
     return total_votes, candidates, percentages, winner
@@ -46,7 +46,7 @@ def print_results(total_votes, candidates, percentages, winner):
     print(f"Winner: {winner}")
     print("-------------------------")
 
-# Save the results to a text file
+# write the results in a text file
 def save_results_to_file(total_votes, candidates, percentages, winner, output_file="election_results.txt"):
     with open(output_file, "w") as file:
         file.write("Election Results\n")
@@ -63,10 +63,10 @@ def save_results_to_file(total_votes, candidates, percentages, winner, output_fi
         file.write("-------------------------\n")
 
 if __name__ == "__main__":
-    # Get the current script directory
+    # locate the current script directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Specify the relative path to the CSV file
+    # the relative path that to follow to get to the CSV file
     relative_path = os.path.join("OfficialPyPoll", "resources", "Poll_data.csv")
 
     # Read and analyze the data
